@@ -1,4 +1,4 @@
-angular.module('app', ['firebase']);
+angular.module('app', ['ngAnimate', 'ui.bootstrap','firebase']);
 
 angular.module('app').controller("MainController", function($scope, $firebase) {
   var vm = this;
@@ -9,7 +9,6 @@ angular.module('app').controller("MainController", function($scope, $firebase) {
 
   $scope.createReport = function() {
     statusResportsRef.push({title: $scope.searchInput, createDate: new Date().valueOf()});
-    $scope.searchInput = '';
   };
 
 });
