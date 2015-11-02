@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  </head>
+  <body>
+    <input type='text' id='statusInput' placeholder='Status'>
+    <input type='text' id='typeInput' placeholder='Tipo'>
+    <script>
+      var reportId = '-K27mcnZGyjHyyQswdU8';
+      var FIREBASE_REPORTS = 'https://statusreportapp.firebaseio.com/reports/';
+      var myDataRef = new Firebase(FIREBASE_REPORTS + reportId);
+      $('#statusInput').keypress(function (e) {
+        if (e.keyCode == 13) {
+          var description = $('#statusInput').val();
+          var type = $('#typeInput').val();
+          var timestamp = new Date().valueOf();
+          myDataRef.push({description: description, timestamp: timestamp});
+          $('#statusInput').val('');
+        }
+      });
+    </script>
+  </body>
+</html>
