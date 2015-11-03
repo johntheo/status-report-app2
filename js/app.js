@@ -20,6 +20,7 @@ angular.module('app').controller("ReportController", function($scope, $firebase)
   $scope.searchReport = function() {
     var statusResportsRef = new Firebase("https://statusreportapp.firebaseio.com/reports/" + $scope.reportIdInput);
     $scope.report = $firebase(statusResportsRef);
+    $scope.reportId = statusResportsRef.name();
   };
 
 });

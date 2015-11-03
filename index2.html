@@ -33,10 +33,32 @@
         </nav>
 
         <div class="container-fluid">
-            <div class="panel panel-info">
-                <p>{{report.title}}</p>
-            </div>
-            
+    		<div class="row">
+    			<div class="col-md-4"><!-- INFORMAÇÕES -->
+    				<div class="panel panel-default">
+				    	<div class="panel-heading">Informações</div>
+				   		<div class="panel-body">
+				   			<div class="row">
+								<div class="col-sm-4"><strong>Id: </strong></div>
+								<div class="col-sm-8">{{reportId}}</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4"><strong>Nome: </strong></div>
+								<div class="col-sm-8">{{report.title}}</div>
+							</div>
+				   		</div>
+				   	</div>
+    			</div><!-- FIM INFORMAÇÕES -->
+    			
+    			<div class="col-md-8"><!-- STATUS -->
+    				<div class="panel panel-info">
+    					<div class="panel-heading">Atividades</div>
+		                <ul class="list-group">
+		                    <li class="list-group-item" ng-repeat="(key, value) in statusReports |  orderByPriority | filter:searchInput">{{value.title}} <span class="pull-right"><span class="badge">{{value.createDate | date : format : timezone}}</span></span></li>
+		                </ul>
+		            </div>
+    			</div><!-- FIM STATUS -->
+    		</div>
         </div>
-</body>
+	</body>
 </html>
