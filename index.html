@@ -13,31 +13,37 @@
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
     
   </head>
     <body ng-app="app" ng-controller="MainController as main">
          <!-- Fixed navbar -->
         <nav class="navbar navbar-default navbar-static-top">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="#">Status Reports</a>
+            <div class="nav navbar-nav navbar-left" ng-show="viewBackButton">
+                <a class="navbar-brand" ng-click="init()"> <span class="glyphicon glyphicon-chevron-left"></span> </a>
             </div>
-            <!--<div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                      <input type="text" ng-model="searchInput" uib-typeahead="report.title for report in statusReports |  orderByPriority | filter:searchInput | limitTo:8" class="form-control">
-                    </div>
-                    <button ng-click="createReport()" class="btn btn-success">Criar</button>
-              </form>
-            </div>--><!--/.nav-collapse -->
-          </div>
+            <div class="container-fluid">
+            
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Status Reports</a>
+                </div>
+                <!--<div id="navbar" class="navbar-collapse collapse">
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                          <input type="text" ng-model="searchInput" uib-typeahead="report.title for report in statusReports |  orderByPriority | filter:searchInput | limitTo:8" class="form-control">
+                        </div>
+                        <button ng-click="createReport()" class="btn btn-success">Criar</button>
+                  </form>
+                </div>--><!--/.nav-collapse -->
+            </div>
         </nav>
 
-        <div class="container-fluid">
+        <!-- SEARCH SECTION-->
+        <div class="container-fluid" ng-show="viewSearch">
             <div class="input-group">
               <input type="text" ng-model="searchInput" uib-typeahead="report.title for report in statusReports |  orderByPriority | filter:searchInput | limitTo:8" class="form-control" placeholder="Procurar report..."/>
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Criar!</button>
+                <button class="btn btn-default" type="button" ng-click="createReport()">Criar!</button>
               </span>
             </div><!-- /input-group -->
 
@@ -45,10 +51,62 @@
 
             <div class="panel panel-info">
                 <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="(key, value) in statusReports |  orderByPriority | filter:searchInput">{{value.title}} <span class="pull-right"><span class="badge">{{value.createDate | date : format : timezone}}</span></span></li>
+                    <li class="list-group-item" ng-repeat="value in statusReports |  orderByPriority | filter:searchInput" ng-click="showReport(value)">{{value.title}} <span class="pull-right"><span class="badge">{{value.createDate | date : format : timezone}}</span></span></li>
                 </ul>
             </div>
             
+        </div>
+
+        <!-- RESULT SECTION-->
+        <div class="container-fluid" ng-show="viewReport">
+            <div class="row">
+                <div class="col-md-4"><!-- INFORMAÇÕES -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Informações</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-4"><strong>Id: </strong></div>
+                                <div class="col-sm-8">{{reportId}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4"><strong>Nome: </strong></div>
+                                <div class="col-sm-8">{{report.title}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- FIM INFORMAÇÕES -->
+                
+                <div class="col-md-8"><!-- STATUS -->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Atividades</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8"><input type="text" class="form-control" placeholder="Descrição"></div>
+                                <div class="col-md-4">
+                                    <div class="btn-group" data-toggle="buttons-radio">
+                                        <label class="radio-inline">
+                                          <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Problema
+                                        </label>
+                                        <label class="radio-inline">
+                                          <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Informação
+                                        </label>
+                                        <label class="radio-inline">
+                                          <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Sucesso
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-12"><button ng-click="createActivity()" class="btn btn-default btn-block">Registrar</button></div>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="(key, value) in statusReports |  orderByPriority | filter:searchInput">{{value.title}} <span class="pull-right"><span class="badge error">{{value.createDate | date : format : timezone}}</span></span></li>
+                        </ul>
+                    </div>
+                </div><!-- FIM STATUS -->
+            </div>
         </div>
 </body>
 </html>

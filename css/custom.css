@@ -1,43 +1,6 @@
-
-/*=======================================
-CUSTOM STYLES
-==================================================*/
-.twt-wrapper .panel-body {
-    max-height:650px;
-    overflow:auto;
+.navbar-left {
+    float: left;
+    vertical-align: middle;
+    margin-left:1px;
+    padding:0px 0px;
 }
-.twt-wrapper .media-list .media img {
-    width:64px;
-    height:64px;
-    border:2px solid #e5e7e8;
-}
-.twt-wrapper .media-list .media {
-    border-bottom:1px dashed #efefef;
-    margin-bottom:25px;
-}
-
-.typeahead-demo .custom-popup-wrapper {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    background-color: #f9f9f9;
-  }
-
-  .typeahead-demo .custom-popup-wrapper > .message {
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
-    color: #868686;
-  }
-
-  .typeahead-demo .custom-popup-wrapper > .dropdown-menu {
-    position: static;
-    float: none;
-    display: block;
-    min-width: 160px;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-  }
