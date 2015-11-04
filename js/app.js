@@ -14,6 +14,7 @@ angular.module('app').controller("MainController", function($scope, $firebase) {
     $scope.viewReport = false;
     $scope.viewBackButton = false;
     $scope.typeInput = 'Informação';
+    $scope.editorEnabled = false;
 
     $scope.init = function(){
         $scope.viewSearch = true;
@@ -42,19 +43,40 @@ angular.module('app').controller("MainController", function($scope, $firebase) {
         $scope.descriptionInput = '';
     }
 
+    $scope.enableEditor = function() {
+        $scope.editorEnabled = true;
+    };
+
+    $scope.disableEditor = function() {
+        $scope.editorEnabled = false;
+    };
+
+    $scope.save = function() {
+        //$scope.statusReports.$child($scope.report.$id).$save($scope.report);
+        $scope.disableEditor();
+    };
+
 });
 
-app.filter('toArray', function () {
-    'use strict';
+app.filter('orderObjectBy', function(){
+  return function(input, attribute) {
+    if (!angular.isObject(input)) return input;
 
-    return function (obj) {
-        if (!(obj instanceof Object)) {
-            return obj;
-        }
-
-        return Object.keys(obj).map(function (key) {
-            return Object.defineProperty(obj[key], '$key', {__proto__: null, value: key});
-        });
+    var array = [];
+    for(var objectKey in input) {
+      array.push(input[objectKey]);
     }
+
+    function compare(a,b) {
+      if (a[attribute] < b[attribute])
+        return -1;
+      if (a[attribute] > b[attribute])
+        return 1;
+      return 0;
+    }
+
+    array.sort(compare);
+    return array;
+  }
 });
 

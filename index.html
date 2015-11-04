@@ -76,11 +76,33 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4"><strong>Area: </strong></div>
-                                <div class="col-sm-8">{{report.area}}</div>
+                                <div class="col-sm-8">
+                                    <div ng-hide="editorEnabled">
+                                        {{report.area}}
+                                        <a href="#" ng-click="enableEditor()">Editar</a>
+                                    </div>
+                                    <div ng-show="editorEnabled">
+                                        <input ng-model="report.area" ng-show="editorEnabled">
+                                        <a href="#" ng-click="save()">Salvar</a>
+                                        or
+                                        <a href="#" ng-click="disableEditor()">cancelar</a>.
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4"><strong>Projeto: </strong></div>
-                                <div class="col-sm-8">{{report.project}}</div>
+                                <div class="col-sm-8">
+                                    <div ng-hide="editorEnabled">
+                                        {{report.project}}
+                                        <a href="#" ng-click="enableEditor()">Editar</a>
+                                    </div>
+                                    <div ng-show="editorEnabled">
+                                        <input ng-model="report.project" ng-show="editorEnabled">
+                                        <a href="#" ng-click="save()">Salvar</a>
+                                        or
+                                        <a href="#" ng-click="disableEditor()">cancelar</a>.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
